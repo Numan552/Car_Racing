@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Retro Neon Racer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="ui-layer">
+            <div id="start-screen" class="screen active">
+                <h1>NEON RACER</h1>
+                <p>Avoid oncoming traffic and survive as long as you can!</p>
+                <div class="controls-guide">
+                    <p><strong>Controls:</strong> Arrow keys / A & D to switch lanes</p>
+                    <p><strong>Nitro:</strong> Arrow Up / W (Speeds up game, 2x points)</p>
+                    <p><strong>Pause:</strong> P Key</p>
+                </div>
+                <button id="start-btn">START RACE</button>
+            </div>
+
+            <div id="pause-screen" class="screen">
+                <h2>GAME PAUSED</h2>
+                <p>Press <strong>P</strong> or tap resume to continue</p>
+                <button id="resume-btn">RESUME</button>
+            </div>
+
+            <div id="game-over-screen" class="screen">
+                <h2>CRASHED!</h2>
+                <p>Score: <span id="final-score">0</span></p>
+                <p>High Score: <span id="high-score">0</span></p>
+                <button id="restart-btn">PLAY AGAIN</button>
+            </div>
+
+            <div id="hud" class="hidden">
+                <div class="hud-item">SCORE: <span id="score-display">0</span></div>
+                <div id="nitro-badge" class="hud-item">NITRO READY</div>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="mobile-controls">
+            <div id="btn-left" class="touch-btn">◀</div>
+            <div id="btn-nitro" class="touch-btn nitro">NITRO</div>
+            <div id="btn-right" class="touch-btn">▶</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

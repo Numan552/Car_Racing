@@ -1,0 +1,249 @@
+:root {
+    --neon-blue: #00f3ff;
+    --neon-pink: #ff0055;
+    --neon-purple: #9d4edd;
+    --bg-dark: #0a0a12;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    background-color: #05050a;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    position: relative;
+    width: 440px;
+    height: 650px;
+    background-color: var(--bg-dark);
+    box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* UI Layers & Overlays */
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Let clicks pass through unless active */
+    z-index: 10;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 18, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: auto;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Typography & Neon FX */
+h1 {
+    font-size: 2.8rem;
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+    margin-bottom: 20px;
+}
+
+p {
+    color: #a0a0ba;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.controls-guide {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    margin-bottom: 25px;
+    text-align: left;
+    font-size: 0.85rem;
+}
+
+.controls-guide p {
+    margin-bottom: 8px;
+}
+.controls-guide p:last-child {
+    margin-bottom: 0;
+}
+
+/* Interactive Components */
+button {
+    background: transparent;
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+button:hover {
+    background: var(--neon-blue);
+    color: var(--bg-dark);
+    box-shadow: 0 0 20px var(--neon-blue);
+}
+
+#game-over-screen button {
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    box-shadow: 0 0 10px rgba(255, 0, 85, 0.2);
+}
+
+#game-over-screen button:hover {
+    background: var(--neon-pink);
+    color: white;
+    box-shadow: 0 0 20px var(--neon-pink);
+}
+
+/* Heads-Up Display */
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.hidden {
+    display: none !important;
+}
+
+#nitro-badge {
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    background: rgba(157, 78, 221, 0.3);
+    border: 1px solid var(--neon-purple);
+    color: #e0aaff;
+    border-radius: 4px;
+    transition: all 0.1s ease;
+}
+
+#nitro-badge.active-boosting {
+    background: var(--neon-purple);
+    color: white;
+    box-shadow: 0 0 10px var(--neon-purple);
+    animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+}
+
+/* Mobile Touch Layer */
+#mobile-controls {
+    display: none;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    padding: 0 20px;
+    justify-content: space-between;
+    z-index: 20;
+}
+
+.touch-btn {
+    width: 65px;
+    height: 65px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    touch-action: manipulation;
+}
+
+.touch-btn:active {
+    background: rgba(0, 243, 255, 0.3);
+    border-color: var(--neon-blue);
+}
+
+.touch-btn.nitro {
+    width: 90px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    background: rgba(157, 78, 221, 0.2);
+    border-color: rgba(157, 78, 221, 0.4);
+}
+
+.touch-btn.nitro:active {
+    background: var(--neon-purple);
+}
+
+/* Adaptive Viewports */
+@media (max-width: 480px) {
+    #game-container {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+    #mobile-controls {
+        display: flex; /* Show touch keys on small screens */
+    }
+}
