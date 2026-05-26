@@ -1,9 +1,3 @@
-/**
- * RETRO NEON RACER - Game Engine
- * Object-Oriented JavaScript using Canvas API
- */
-
-// --- AUDIO SYNTHESIZER ENGINE (No External Asset Dependencies) ---
 const AudioEngine = {
     ctx: null,
     
@@ -49,7 +43,7 @@ const AudioEngine = {
     }
 };
 
-// --- BASE ENTITY: CAR ---
+//BASE ENTITY: CAR 
 class Car {
     constructor(game, laneCount) {
         this.game = game;
@@ -119,7 +113,7 @@ class Car {
     }
 }
 
-// --- ENEMY CAR ENTITY ---
+//  ENEMY CAR ENTITY 
 class EnemyCar {
     constructor(game, lane, speed, color) {
         this.game = game;
@@ -173,7 +167,7 @@ class EnemyCar {
     }
 }
 
-// --- MAIN SYSTEM GAME MANAGER ---
+//  MAIN SYSTEM GAME MANAGER 
 class Game {
     constructor() {
         this.canvas = document.getElementById('gameCanvas');
